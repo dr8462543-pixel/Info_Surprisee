@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belated Birthday Surprise</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Petals -->
+  <div class="petals">
+    <div class="petal" style="--i:0;"></div>
+    <div class="petal" style="--i:1;"></div>
+    <div class="petal" style="--i:2;"></div>
+    <div class="petal" style="--i:3;"></div>
+    <div class="petal" style="--i:4;"></div>
+    <div class="petal" style="--i:5;"></div>
+    <div class="petal" style="--i:6;"></div>
+    <div class="petal" style="--i:7;"></div>
+    <div class="petal" style="--i:8;"></div>
+    <div class="petal" style="--i:9;"></div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bgMusic" loop>
+    <source src="birthday_song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <button id="musicToggle">🎵 Pause Music</button>
+
+  <!-- Header -->
+  <header>
+    <h1>Welcome to My Website</h1>
+    <p>Explore and enjoy the content!</p>
+    <div class="scroll-down">
+      <p>Scroll down for surprise :></p>
+      <span class="arrow">⬇</span>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+    <a href="#birthday">🎂 Surprise</a>
+  </nav>
+
+  <!-- Sections -->
+  <section id="home">
+    <h2>Home</h2>
+    <p>This is the homepage of my personal website. Here you can find various sections about me and what I love.</p>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>Hi! This website is created to share some information, photos, and a little surprise at the end. Keep scrolling 😉.</p>
+  </section>
+
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <img src="hello.jpg" alt="Photo">
+      <img src="hello2.jpg" alt="Photo">
+      <img src="hello3.jpg" alt="Photo">
+      <img src="hello4.jpg" alt="Photo">
+      <img src="hello5.jpg" alt="Photo">
+      <img src="hello6.jpg" alt="Photo">
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>You can reach out to me at: <strong>anshrajput000015@gmail.com</strong></p>
+    <p>Phone number: <strong>8299859418, 8299492485</strong></p>
+  </section>
+
+  <!-- Birthday Section -->
+  <section id="birthday" class="birthday">
+    <h2>🎉 Belated Happy Birthday Dad! 🎉</h2>
+
+    <!-- Birthday Photo with Glow & Sparkles -->
+    <div class="birthday-photo-container">
+      <img src="dad.jpg" alt="Dad Photo" class="dad-photo">
+      <div class="sparkle" style="--x:10%; --y:20%; --size:6px;"></div>
+      <div class="sparkle" style="--x:70%; --y:10%; --size:8px;"></div>
+      <div class="sparkle" style="--x:50%; --y:80%; --size:5px;"></div>
+      <div class="sparkle" style="--x:30%; --y:60%; --size:7px;"></div>
+      <div class="sparkle" style="--x:80%; --y:50%; --size:6px;"></div>
+    </div>
+
+    <p><strong>Date: 16th September</strong></p>
+
+    <!-- Editable Birthday Message -->
+    <div class="birthday-message" contenteditable="true">
+      Even though this wish comes a little late, my love and gratitude for you are timeless.  
+      You’ve always been my guide, my hero, and my biggest inspiration.  
+      I hope your special day was filled with joy and blessings❤️. I was going to wish you with a gift but now I don't have a gift, so this is a small work made by me and a small surprise at the end of this website❤️
+    </div>
+
+    <!-- Video Button -->
+    <a href="my_dad_video.mp4" target="_blank" class="video-button">🎥 Watch My Edit</a>
+
+    <p>With love and respect,</p>
+    <p><strong>Your Child</strong></p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 My Website | Made with ❤️</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        document.getElementById(this.getAttribute('href').substring(1))
+          .scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Music autoplay on first interaction
+    const music = document.getElementById('bgMusic');
+    const toggle = document.getElementById('musicToggle');
+
+    function playMusic() {
+      music.play().catch(() => {});
+      document.removeEventListener('click', playMusic);
+      document.removeEventListener('scroll', playMusic);
+    }
+    document.addEventListener('click', playMusic);
+    document.addEventListener('scroll', playMusic);
+
+    // Music toggle button
+    toggle.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        toggle.textContent = '🎵 Pause Music';
+      } else {
+        music.pause();
+        toggle.textContent = '🎵 Play Music';
+      }
+    });
+
+    // Confetti animation for video button
+    function createConfetti() {
+      const colors = ['#ff6b81','#ffd700','#1dd1a1','#ff9f43','#ff6b6b'];
+      const confettiContainer = document.createElement('div');
+      confettiContainer.style.position='fixed';
+      confettiContainer.style.top='0';
+      confettiContainer.style.left='0';
+      confettiContainer.style.width='100%';
+      confettiContainer.style.height='100%';
+      confettiContainer.style.pointerEvents='none';
+      confettiContainer.style.zIndex=9999;
+      document.body.appendChild(confettiContainer);
+
+      const particleCount = window.innerWidth < 600 ? 50 : 100;
+      for (let i=0;i<particleCount;i++){
+        const confetti = document.createElement('div');
+        confetti.style.position='absolute';
+        confetti.style.width='10px';
+        confetti.style.height='10px';
+        confetti.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
+        confetti.style.left=Math.random()*100+'vw';
+        confetti.style.top='-20px';
+        confetti.style.opacity=Math.random()+0.5;
+        confetti.style.transform=`rotate(${Math.random()*360}deg)`;
+        confetti.style.borderRadius='50%';
+        confettiContainer.appendChild(confetti);
+        const fallDuration = (window.innerWidth < 600 ? 4000 : 3000)+Math.random()*2000;
+        confetti.animate([{transform:`translateY(0px) rotate(${Math.random()*360}deg)`},{transform:`translateY(100vh) rotate(${Math.random()*720}deg)`}],{duration:fallDuration,iterations:1,easing:'linear'});
+        setTimeout(()=>confetti.remove(),fallDuration);
+      }
+      setTimeout(()=>confettiContainer.remove(),5000);
+    }
+    document.querySelector('.video-button').addEventListener('click', createConfetti);
+  </script>
+
+<!-- Floating Petals -->
+<div class="petals">
+  <div class="petal">🌸</div>
+  <div class="petal">🌸</div>
+  <div class="petal">🌸</div>
+  <div class="petal">🌸</div>
+  <div class="petal">🌸</div>
+  <div class="petal">🌸</div>
+  <div class="petal">🌸</div>
+  <div class="petal">🌸</div>
+</div>
+
+<script>
+  const petals = document.querySelectorAll('.petal');
+  petals.forEach(petal => {
+    const start = Math.random(); // horizontal start
+    const duration = 5 + Math.random() * 5; // 5–10s duration
+    const size = 20 + Math.random() * 20; // 20–40px size
+    petal.style.setProperty('--start', start);
+    petal.style.animationDuration = `${duration}s`;
+    petal.style.fontSize = `${size}px`;
+    petal.style.left = `${start * 100}%`;
+  });
+</script>
+
+
+</body>
+</html>
